@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>fpkxrainnn - Check Status</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- เปลี่ยนมาใช้ระบบสไตล์เวอร์ชันเสถียร แก้ปัญหาปุ่มล็อก -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.0.0-alpha.33/dist/index.global.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,6 +15,11 @@
             font-family: 'Poppins', 'Kanit', sans-serif;
             background-color: #FDFBF7;
             color: #4A3E3D;
+        }
+        /* ล็อกให้ปุ่มกดทำงานได้แน่นอน */
+        button, input {
+            pointer-events: auto !important;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -40,8 +46,8 @@
                 <input type="text" id="search-input" placeholder="กรอกชื่อแอคเค้าท์ของคุณ" 
                        class="w-full px-4 py-3 bg-[#FDFBF7] border border-[#EADCC9] rounded-xl focus:outline-none focus:border-[#FFD1DC] focus:ring-2 focus:ring-[#FFD1DC] text-base transition-all">
             </div>
-            <button id="search-btn" onclick="searchOrder()" class="w-full py-3.5 bg-[#FFD1DC] hover:bg-[#F3B0C3] text-[#8C6239] font-medium rounded-xl shadow-md shadow-[#FFE5EC] transition-all cursor-pointer flex justify-center items-center">
-                <span id="btn-text">ตรวจสอบสถานะ</span>
+            <button id="search-btn" onclick="searchOrder()" class="w-full py-3.5 bg-[#FFD1DC] hover:bg-[#F3B0C3] text-[#8C6239] font-medium rounded-xl shadow-md shadow-[#FFE5EC] transition-all flex justify-center items-center">
+                <span id="btn-text"><b>ตรวจสอบสถานะ</b></span>
             </button>
         </div>
 
@@ -86,7 +92,7 @@
                     <p class="text-xs text-[#F3B0C3] font-medium">เลขพัสดุของคุณ</p>
                     <p id="res-tracking" class="text-base font-bold text-[#8C6239] mt-0.5">-</p>
                 </div>
-                <button onclick="copyTracking()" class="text-xs bg-white border border-[#FFE5EC] text-[#8C6239] px-3 py-1.5 rounded-lg hover:bg-[#FFD1DC] transition-all cursor-pointer">
+                <button onclick="copyTracking()" class="text-xs bg-white border border-[#FFE5EC] text-[#8C6239] px-3 py-1.5 rounded-lg hover:bg-[#FFD1DC] transition-all">
                     คัดลอก
                 </button>
             </div>
@@ -105,7 +111,6 @@
     <p class="text-xs text-[#BC9B8B] mt-6">© 2026 fpkxrainnn. All rights reserved.</p>
 
     <script>
-        // เชื่อมโยงกับ Google Sheets ของคุณโดยตรงแบบปลอดภัย
         const SHEET_ID = "15D9UCheHWBbkSbkCBZpMc-wx_T7uMn3KDKBFb-LqhC4";
         const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
 
@@ -140,7 +145,7 @@
                 return;
             }
 
-            btnText.innerText = "กำลังค้นหา...";
+            btnText.innerHTML = "<b>กำลังค้นหา...</b>";
             searchBtn.disabled = true;
             resultBox.classList.add('hidden');
             errorBox.classList.add('hidden');
@@ -180,6 +185,3 @@
                     
                     if(payStatus.includes("แล้ว") || payStatus.includes("สำเร็จ") || payStatus.toLowerCase().includes("paid")) {
                         badge.className = "px-3 py-1 rounded-full text-xs font-medium bg-[#E6F4EA] text-[#137333]";
-                        badge.innerText = "Paid";
-                    } else {
-                        badge.className = "px-3 py-1 rounded-full text-xs font-medium bg-[#FEF7E0]
