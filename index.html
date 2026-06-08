@@ -134,6 +134,12 @@
             }
         }
 
+        // ฟังก์ชันล้างเครื่องหมายคำพูดส่วนเกิน
+        function cleanCell(cell) {
+            if (!cell) return "";
+            return cell.replace(/^"|"$/g, '').trim();
+        }
+
         async function searchOrder() {
             const inputValue = document.getElementById('search-input').value.trim().toLowerCase();
             const resultBox = document.getElementById('result-box');
@@ -155,21 +161,26 @@
                 const response = await fetch(CSV_URL);
                 const dataText = await response.text();
                 
-                const rows = dataText.split("\n").map(row => row.split(`,`).map(cell => cell.replace(/^"|"$/g, '').trim()));
+                // แก้ไขระบบแยกแถวและช่องอัจฉริยะ ป้องกันปัญหาระบบคั่นด้วยคอมมาหรือเซมิโคลอน
+                const lines = dataText.split(/\r?\n/);
                 let foundData = null;
 
-                for(let i = 1; i < rows.length; i++) {
-                    if(!rows[i][0]) continue;
+                for(let i = 1; i < lines.length; i++) {
+                    if (!lines[i]) continue;
                     
-                    const sheetAccount = rows[i][0].toLowerCase();
-                    const sheetPhone = rows[i][1] ? rows[i][1].replace(/-/g, "") : "";
+                    // แตกช่องโดยเช็คทั้งเครื่องหมาย , และ ;
+                    let cols = lines[i].split(/[,;]/);
+                    if(!cols[0]) continue;
+                    
+                    const sheetAccount = cleanCell(cols[0]).toLowerCase();
+                    const sheetPhone = cols[1] ? cleanCell(cols[1]).replace(/-/g, "") : "";
                     const cleanInput = inputValue.replace(/-/g, "");
 
                     if(currentSearchType === 'account' && sheetAccount === cleanInput) {
-                        foundData = rows[i];
+                        foundData = cols.map(c => cleanCell(c));
                         break;
                     } else if(currentSearchType === 'phone' && sheetPhone === cleanInput) {
-                        foundData = rows[i];
+                        foundData = cols.map(c => cleanCell(c));
                         break;
                     }
                 }
@@ -182,4 +193,91 @@
                     
                     const payStatus = foundData[3] || "-";
                     document.getElementById('res-payment').innerText = payStatus;
-                    const badge = document
+                    const badge = document.getElementById('payment-badge');
+                    
+                    if(payStatus.includes("แล้ว") || payStatus.includes("สำเร็จ") || payStatus.toLowerCase().includes("paid")) {
+                        badge.style.backgroundColor = "#E6F4EA";
+                        badge.style.color = "#137333";
+                        badge.innerText = "Paid";
+                    } else {
+                        badge.style.backgroundColor = "#FEF7E0";
+                        badge.style.color = "#B06000";
+                        badge.innerText = "Pending";
+                    }
+                    
+                    const shippingStatus = foundData[4] || "-";
+                    updateProgressBar(shippingStatus);
+
+                    const trackingBox = document.getElementById('tracking-box');
+                    if((shippingStatus === "จัดส่งแล้ว" || shippingStatus === "เตรียมจัดส่ง") && foundData[5] && foundData[5] !== "-") {
+                        trackingBox.classList.remove('hidden');
+                        document.getElementById('res-tracking').innerText = foundData[5];
+                    } else {
+                        trackingBox.classList.add('hidden');
+                    }
+
+                    const noteBox = document.getElementById('note-box');
+                    if(foundData[6] && foundData[6] !== "") {
+                        noteBox.classList.remove('hidden');
+                        document.getElementById('res-note').innerText = foundData[6];
+                    } else {
+                        noteBox.classList.add('hidden');
+                    }
+                } else {
+                    errorBox.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error(error);
+                alert("เกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล กรุณาลองใหมี่อีกครั้งค่ะ");
+            } finally {
+                btnText.innerHTML = "<b>ตรวจสอบสถานะ</b>";
+                searchBtn.disabled = false;
+            }
+        }
+
+        function updateProgressBar(status) {
+            const line = document.getElementById('progress-line');
+            const s1 = document.getElementById('step-1');
+            const s2 = document.getElementById('step-2');
+            const s3 = document.getElementById('step-3');
+
+            [s1, s2, s3].forEach(s => {
+                s.style.backgroundColor = "#F7F4EF";
+                s.style.borderColor = "#EADCC9";
+                s.innerHTML = "";
+            });
+            line.style.width = "0%";
+
+            if(status === "รับออเดอร์" || status === "รอดำเนินการ") {
+                s1.style.backgroundColor = "#8C6239";
+                s1.style.borderColor = "#8C6239";
+                s1.innerHTML = "✓";
+                line.style.width = "0%";
+            } else if(status === "กำลังผลิต") {
+                s1.style.backgroundColor = "#BC9B8B";
+                s1.style.borderColor = "#BC9B8B";
+                s2.style.backgroundColor = "#8C6239";
+                s2.style.borderColor = "#8C6239";
+                s1.innerHTML = "✓"; s2.innerHTML = "✓";
+                line.style.width = "50%";
+            } else if(status === "จัดส่งแล้ว" || status === "เตรียมจัดส่ง") {
+                s1.style.backgroundColor = "#BC9B8B";
+                s1.style.borderColor = "#BC9B8B";
+                s2.style.backgroundColor = "#BC9B8B";
+                s2.style.borderColor = "#BC9B8B";
+                s3.style.backgroundColor = "#8C6239";
+                s3.style.borderColor = "#8C6239";
+                s1.innerHTML = "✓"; s2.innerHTML = "✓"; s3.innerHTML = "✓";
+                line.style.width = "100%";
+            }
+        }
+
+        function copyTracking() {
+            const text = document.getElementById('res-tracking').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("คัดลอกเลขพัสดุเรียบร้อยแล้วค่ะ!");
+            });
+        }
+    </script>
+</body>
+</html>
