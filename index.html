@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>fpkxrainnn - Check Status</title>
-    <!-- เปลี่ยนมาใช้ระบบสไตล์เวอร์ชันเสถียร แก้ปัญหาปุ่มล็อก -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.0.0-alpha.33/dist/index.global.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -16,7 +15,6 @@
             background-color: #FDFBF7;
             color: #4A3E3D;
         }
-        /* ล็อกให้ปุ่มกดทำงานได้แน่นอน */
         button, input {
             pointer-events: auto !important;
             cursor: pointer;
@@ -25,90 +23,89 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4">
 
-    <div class="w-full max-w-md bg-white rounded-3xl p-8 shadow-xl shadow-[#F3EBE1] border border-[#F3EBE1]">
+    <div class="w-full max-w-md bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
         
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold tracking-wide text-[#8C6239]">fpkxrainnn</h1>
-            <p class="text-sm text-[#BC9B8B] mt-1">Check Your Order Status</p>
+            <h1 class="text-3xl font-bold tracking-wide text-amber-900" style="color: #8C6239;">fpkxrainnn</h1>
+            <p class="text-sm mt-1" style="color: #BC9B8B;">Check Your Order Status</p>
         </div>
 
-        <div class="flex bg-[#F7F4EF] p-1 rounded-xl mb-6">
-            <button id="tab-account" onclick="switchTab('account')" class="flex-1 py-2 text-sm font-medium rounded-lg bg-[#FFD1DC] text-[#8C6239] transition-all">
+        <div class="flex p-1 rounded-xl mb-6" style="background-color: #F7F4EF;">
+            <button id="tab-account" onclick="switchTab('account')" class="flex-1 py-2 text-sm font-medium rounded-lg transition-all focus:outline-none" style="background-color: #FFD1DC; color: #8C6239;">
                 ชื่อแอคเค้าท์
             </button>
-            <button id="tab-phone" onclick="switchTab('phone')" class="flex-1 py-2 text-sm font-medium rounded-lg text-[#BC9B8B] transition-all">
+            <button id="tab-phone" onclick="switchTab('phone')" class="flex-1 py-2 text-sm font-medium rounded-lg transition-all focus:outline-none" style="color: #BC9B8B;">
                 เบอร์โทรศัพท์
             </button>
         </div>
 
         <div class="space-y-4">
-            <div class="relative">
-                <input type="text" id="search-input" placeholder="กรอกชื่อแอคเค้าท์ของคุณ" 
-                       class="w-full px-4 py-3 bg-[#FDFBF7] border border-[#EADCC9] rounded-xl focus:outline-none focus:border-[#FFD1DC] focus:ring-2 focus:ring-[#FFD1DC] text-base transition-all">
-            </div>
-            <button id="search-btn" onclick="searchOrder()" class="w-full py-3.5 bg-[#FFD1DC] hover:bg-[#F3B0C3] text-[#8C6239] font-medium rounded-xl shadow-md shadow-[#FFE5EC] transition-all flex justify-center items-center">
+            <input type="text" id="search-input" placeholder="กรอกชื่อแอคเค้าท์ของคุณ" 
+                   class="w-full px-4 py-3 border rounded-xl focus:outline-none text-base transition-all" style="background-color: #FDFBF7; border-color: #EADCC9;">
+            
+            <button id="search-btn" onclick="searchOrder()" class="w-full py-3.5 font-medium rounded-xl shadow-sm transition-all flex justify-center items-center focus:outline-none" style="background-color: #FFD1DC; color: #8C6239;">
                 <span id="btn-text"><b>ตรวจสอบสถานะ</b></span>
             </button>
         </div>
 
-        <div id="result-box" class="hidden mt-8 pt-6 border-t border-[#F7F4EF] space-y-5">
+        <div id="result-box" class="hidden mt-8 pt-6 border-t space-y-5" style="border-color: #F7F4EF;">
             
-            <div class="bg-[#FDFBF7] p-4 rounded-xl border border-[#F3EBE1]">
-                <p class="text-xs text-[#BC9B8B] font-medium uppercase tracking-wider">สินค้าของคุณ</p>
-                <p id="res-product" class="text-base font-medium text-[#4A3E3D] mt-1">-</p>
+            <div class="p-4 rounded-xl border" style="background-color: #FDFBF7; border-color: #F3EBE1;">
+                <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">สินค้าของคุณ</p>
+                <p id="res-product" class="text-base font-medium mt-1" style="color: #4A3E3D;">-</p>
             </div>
 
-            <div class="bg-[#FDFBF7] p-4 rounded-xl border border-[#F3EBE1] flex justify-between items-center">
+            <div class="p-4 rounded-xl border flex justify-between items-center" style="background-color: #FDFBF7; border-color: #F3EBE1;">
                 <div>
-                    <p class="text-xs text-[#BC9B8B] font-medium uppercase tracking-wider">การชำระเงิน</p>
-                    <p id="res-payment" class="text-base font-semibold text-[#8C6239] mt-1">-</p>
+                    <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">การชำระเงิน</p>
+                    <p id="res-payment" class="text-base font-semibold mt-1" style="color: #8C6239;">-</p>
                 </div>
                 <span id="payment-badge" class="px-3 py-1 rounded-full text-xs font-medium"></span>
             </div>
 
             <div>
-                <p class="text-xs text-[#BC9B8B] font-medium uppercase tracking-wider mb-4">สถานะการจัดส่ง</p>
+                <p class="text-xs font-medium uppercase tracking-wider mb-4" style="color: #BC9B8B;">สถานะการจัดส่ง</p>
                 <div class="relative flex items-center justify-between">
-                    <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-[#F7F4EF] z-0"></div>
-                    <div id="progress-line" class="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-[#BC9B8B] w-0 z-0 transition-all duration-500"></div>
+                    <div class="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 h-1 z-0" style="background-color: #F7F4EF;"></div>
+                    <div id="progress-line" class="absolute left-0 top-1/2 transform -translate-y-1/2 h-1 w-0 z-0 transition-all duration-500" style="background-color: #BC9B8B;"></div>
 
                     <div class="z-10 flex flex-col items-center">
-                        <div id="step-1" class="w-6 h-6 rounded-full bg-[#F7F4EF] border-2 border-[#EADCC9] flex items-center justify-center text-xs text-white transition-all"></div>
-                        <span class="text-[11px] mt-1 text-[#BC9B8B] font-medium">รับออเดอร์</span>
+                        <div id="step-1" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                        <span class="text-[11px] mt-1 font-medium" style="color: #BC9B8B;">รับออเดอร์</span>
                     </div>
                     <div class="z-10 flex flex-col items-center">
-                        <div id="step-2" class="w-6 h-6 rounded-full bg-[#F7F4EF] border-2 border-[#EADCC9] flex items-center justify-center text-xs text-white transition-all"></div>
-                        <span class="text-[11px] mt-1 text-[#BC9B8B] font-medium">กำลังผลิต</span>
+                        <div id="step-2" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                        <span class="text-[11px] mt-1 font-medium" style="color: #BC9B8B;">กำลังผลิต</span>
                     </div>
                     <div class="z-10 flex flex-col items-center">
-                        <div id="step-3" class="w-6 h-6 rounded-full bg-[#F7F4EF] border-2 border-[#EADCC9] flex items-center justify-center text-xs text-white transition-all"></div>
-                        <span class="text-[11px] mt-1 text-[#BC9B8B] font-medium">จัดส่งแล้ว</span>
+                        <div id="step-3" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                        <span class="text-[11px] mt-1 font-medium" style="color: #BC9B8B;">จัดส่งแล้ว</span>
                     </div>
                 </div>
             </div>
 
-            <div id="tracking-box" class="hidden bg-[#FFF5F7] p-4 rounded-xl border border-[#FFE5EC] flex justify-between items-center">
+            <div id="tracking-box" class="hidden p-4 rounded-xl border flex justify-between items-center" style="background-color: #FFF5F7; border-color: #FFE5EC;">
                 <div>
-                    <p class="text-xs text-[#F3B0C3] font-medium">เลขพัสดุของคุณ</p>
-                    <p id="res-tracking" class="text-base font-bold text-[#8C6239] mt-0.5">-</p>
+                    <p class="text-xs font-medium" style="color: #F3B0C3;">เลขพัสดุของคุณ</p>
+                    <p id="res-tracking" class="text-base font-bold mt-0.5" style="color: #8C6239;">-</p>
                 </div>
-                <button onclick="copyTracking()" class="text-xs bg-white border border-[#FFE5EC] text-[#8C6239] px-3 py-1.5 rounded-lg hover:bg-[#FFD1DC] transition-all">
+                <button onclick="copyTracking()" class="text-xs bg-white border px-3 py-1.5 rounded-lg transition-all focus:outline-none" style="border-color: #FFE5EC; color: #8C6239;">
                     คัดลอก
                 </button>
             </div>
 
-            <div id="note-box" class="hidden bg-[#F7F4EF] p-4 rounded-xl text-xs text-[#8C6239] leading-relaxed">
+            <div id="note-box" class="hidden p-4 rounded-xl text-xs leading-relaxed" style="background-color: #F7F4EF; color: #8C6239;">
                 <strong>หมายเหตุ:</strong> <span id="res-note">-</span>
             </div>
         </div>
 
-        <div id="error-box" class="hidden mt-6 text-center text-sm text-[#D16D6D] bg-[#FFF5F5] p-3 rounded-xl border border-[#FFE5EC]">
+        <div id="error-box" class="hidden mt-6 text-center text-sm p-3 rounded-xl border" style="color: #D16D6D; background-color: #FFF5F5; border-color: #FFE5EC;">
             ไม่พบข้อมูลออเดอร์ของคุณ กรุณาตรวจสอบข้อมูลอีกครั้งค่ะ
         </div>
 
     </div>
 
-    <p class="text-xs text-[#BC9B8B] mt-6">© 2026 fpkxrainnn. All rights reserved.</p>
+    <p class="text-xs mt-6" style="color: #BC9B8B;">© 2026 fpkxrainnn. All rights reserved.</p>
 
     <script>
         const SHEET_ID = "15D9UCheHWBbkSbkCBZpMc-wx_T7uMn3KDKBFb-LqhC4";
@@ -123,12 +120,16 @@
             const input = document.getElementById('search-input');
 
             if(type === 'account') {
-                tabAccount.className = "flex-1 py-2 text-sm font-medium rounded-lg bg-[#FFD1DC] text-[#8C6239] transition-all";
-                tabPhone.className = "flex-1 py-2 text-sm font-medium rounded-lg text-[#BC9B8B] transition-all";
+                tabAccount.style.backgroundColor = "#FFD1DC";
+                tabAccount.style.color = "#8C6239";
+                tabPhone.style.backgroundColor = "transparent";
+                tabPhone.style.color = "#BC9B8B";
                 input.placeholder = "กรอกชื่อแอคเค้าท์ของคุณ";
             } else {
-                tabAccount.className = "flex-1 py-2 text-sm font-medium rounded-lg text-[#BC9B8B] transition-all";
-                tabPhone.className = "flex-1 py-2 text-sm font-medium rounded-lg bg-[#FFD1DC] text-[#8C6239] transition-all";
+                tabAccount.style.backgroundColor = "transparent";
+                tabAccount.style.color = "#BC9B8B";
+                tabPhone.style.backgroundColor = "#FFD1DC";
+                tabPhone.style.color = "#8C6239";
                 input.placeholder = "กรอกเบอร์โทรศัพท์ 10 หลักของคุณ";
             }
         }
@@ -181,7 +182,4 @@
                     
                     const payStatus = foundData[3] || "-";
                     document.getElementById('res-payment').innerText = payStatus;
-                    const badge = document.getElementById('payment-badge');
-                    
-                    if(payStatus.includes("แล้ว") || payStatus.includes("สำเร็จ") || payStatus.toLowerCase().includes("paid")) {
-                        badge.className = "px-3 py-1 rounded-full text-xs font-medium bg-[#E6F4EA] text-[#137333]";
+                    const badge = document
