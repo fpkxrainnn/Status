@@ -19,6 +19,26 @@
             pointer-events: auto !important;
             cursor: pointer;
         }
+        /* สร้างเส้นประแนวตั้ง */
+        .vertical-line {
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            bottom: -8px;
+            width: 2px;
+            border-left: 2px dashed #F7F4EF;
+            z-index: 0;
+        }
+        .vertical-line-progress {
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            width: 2px;
+            height: 0%;
+            border-left: 2px solid #BC9B8B;
+            z-index: 1;
+            transition: height 0.5s ease-in-out;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4">
@@ -71,31 +91,53 @@
             </div>
 
             <div>
-                <p class="text-xs font-medium uppercase tracking-wider mb-4" style="color: #BC9B8B;">สถานะสินค้า</p>
-                <div class="relative flex items-center justify-between px-1">
-                    <div class="absolute left-0 right-0 top-4 transform -translate-y-1/2 h-1 z-0 mx-4" style="background-color: #F7F4EF;"></div>
-                    <div id="progress-line" class="absolute left-0 top-4 transform -translate-y-1/2 h-1 w-0 z-0 mx-4 transition-all duration-500" style="background-color: #BC9B8B;"></div>
+                <p class="text-xs font-medium uppercase tracking-wider mb-4" style="color: #BC9B8B;">สถานะสินค้าล่าสุด</p>
+                
+                <div class="space-y-6 pl-2">
+                    
+                    <div class="relative flex items-start">
+                        <div class="vertical-line"></div>
+                        <div id="line-p1" class="vertical-line-progress"></div>
+                        <div id="step-1" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                        <div class="ml-4">
+                            <p id="txt-1" class="text-sm font-semibold transition-all" style="color: #BC9B8B;">สั่งผลิตเรียบร้อย</p>
+                        </div>
+                    </div>
 
-                    <div class="z-10 flex flex-col items-center flex-1">
-                        <div id="step-1" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-[10px] text-white transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                        <span class="text-[9px] text-center mt-1 font-medium leading-tight" style="color: #BC9B8B; min-height: 24px;">สั่งผลิต<br>เรียบร้อย</span>
+                    <div class="relative flex items-start">
+                        <div class="vertical-line"></div>
+                        <div id="line-p2" class="vertical-line-progress"></div>
+                        <div id="step-2" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                        <div class="ml-4">
+                            <p id="txt-2" class="text-sm font-medium transition-all" style="color: #BC9B8B;">ของถึงโกดังจีน</p>
+                        </div>
                     </div>
-                    <div class="z-10 flex flex-col items-center flex-1">
-                        <div id="step-2" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-[10px] text-white transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                        <span class="text-[9px] text-center mt-1 font-medium leading-tight" style="color: #BC9B8B; min-height: 24px;">ถึงโกดัง<br>จีน</span>
+
+                    <div class="relative flex items-start">
+                        <div class="vertical-line"></div>
+                        <div id="line-p3" class="vertical-line-progress"></div>
+                        <div id="step-3" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                        <div class="ml-4">
+                            <p id="txt-3" class="text-sm font-medium transition-all" style="color: #BC9B8B;">ของถึงโกดังไทย</p>
+                        </div>
                     </div>
-                    <div class="z-10 flex flex-col items-center flex-1">
-                        <div id="step-3" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-[10px] text-white transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                        <span class="text-[9px] text-center mt-1 font-medium leading-tight" style="color: #BC9B8B; min-height: 24px;">ถึงโกดัง<br>ไทย</span>
+
+                    <div class="relative flex items-start">
+                        <div class="vertical-line"></div>
+                        <div id="line-p4" class="vertical-line-progress"></div>
+                        <div id="step-4" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                        <div class="ml-4">
+                            <p id="txt-4" class="text-sm font-medium transition-all" style="color: #BC9B8B;">ของถึงร้านรอจัดส่ง</p>
+                        </div>
                     </div>
-                    <div class="z-10 flex flex-col items-center flex-1">
-                        <div id="step-4" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-[10px] text-white transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                        <span class="text-[9px] text-center mt-1 font-medium leading-tight" style="color: #BC9B8B; min-height: 24px;">ถึงร้าน<br>รอจัดส่ง</span>
+
+                    <div class="relative flex items-start">
+                        <div id="step-5" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                        <div class="ml-4">
+                            <p id="txt-5" class="text-sm font-medium transition-all" style="color: #BC9B8B;">จัดส่งเรียบร้อย</p>
+                        </div>
                     </div>
-                    <div class="z-10 flex flex-col items-center flex-1">
-                        <div id="step-5" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-[10px] text-white transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                        <span class="text-[9px] text-center mt-1 font-medium leading-tight" style="color: #BC9B8B; min-height: 24px;">จัดส่ง<br>เรียบร้อย</span>
-                    </div>
+
                 </div>
             </div>
 
@@ -140,8 +182,7 @@
                 tabPhone.style.backgroundColor = "transparent";
                 tabPhone.style.color = "#BC9B8B";
                 input.placeholder = "กรอกชื่อแอคเค้าท์ของคุณ";
-            } else {
-                tabAccount.style.backgroundColor = "transparent";
+            } else {tabAccount.style.backgroundColor = "transparent";
                 tabAccount.style.color = "#BC9B8B";
                 tabPhone.style.backgroundColor = "#FFD1DC";
                 tabPhone.style.color = "#8C6239";
@@ -162,7 +203,8 @@
             const searchBtn = document.getElementById('search-btn');
             
             if(!inputValue) {
-                alert("กรุณากรอกข้อมูลก่อนกดค้นหาค่ะ");return;
+                alert("กรุณากรอกข้อมูลก่อนกดค้นหาค่ะ");
+                return;
             }
 
             btnText.innerHTML = "<b>กำลังค้นหา...</b>";
@@ -203,7 +245,6 @@
                     document.getElementById('res-date').innerText = foundData[0] || "-"; 
                     document.getElementById('res-product').innerText = foundData[3] || "-"; 
                     
-                    // ปรับเงื่อนไขการเช็คสีป้ายชำระเงิน (จ่ายครบแล้ว = สีเขียว / มัดจำรอบแรก = สีส้ม)
                     const payStatus = foundData[4] || "-"; 
                     document.getElementById('res-payment').innerText = payStatus;
                     const badge = document.getElementById('payment-badge');
@@ -245,55 +286,56 @@
                 }
             } catch (error) {
                 console.error(error);
-                alert("เกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล กรุณาลองใหม่อีกครั้งค่ะ");
+                alert("เกิดข้อผิดพลาดในการเชื่อมต่อฐานข้อมูล กรุณาลองใหมี่อีกครั้งค่ะ");
             } finally {
                 btnText.innerHTML = "<b>ตรวจสอบสถานะ</b>";
                 searchBtn.disabled = false;
             }
         }
 
-        // ฟังก์ชันคำนวณแถบ Progress 5 ขั้นตอนอัจฉริยะ
+        // ฟังก์ชันระบบแนวตั้ง 5 ขั้นตอน ลากเส้นและระบายสีตัวอักษรให้อัตโนมัติ
         function updateProgressBar(status) {
-            const line = document.getElementById('progress-line');
-            const s1 = document.getElementById('step-1');
-            const s2 = document.getElementById('step-2');
-            const s3 = document.getElementById('step-3');
-            const s4 = document.getElementById('step-4');
-            const s5 = document.getElementById('step-5');
+            const s1 = document.getElementById('step-1'); const t1 = document.getElementById('txt-1'); const l1 = document.getElementById('line-p1');
+            const s2 = document.getElementById('step-2'); const t2 = document.getElementById('txt-2'); const l2 = document.getElementById('line-p2');
+            const s3 = document.getElementById('step-3'); const t3 = document.getElementById('txt-3'); const l3 = document.getElementById('line-p3');
+            const s4 = document.getElementById('step-4'); const t4 = document.getElementById('txt-4'); const l4 = document.getElementById('line-p4');
+            const s5 = document.getElementById('step-5'); const t5 = document.getElementById('txt-5');
 
             const steps = [s1, s2, s3, s4, s5];
+            const texts = [t1, t2, t3, t4, t5];
+            const lines = [l1, l2, l3, l4];
 
-            steps.forEach(s => {
-                s.style.backgroundColor = "#F7F4EF";
-                s.style.borderColor = "#EADCC9";
-                s.innerHTML = "";
-            });
-            line.style.width = "0%";
+            // ล้างสถานะเก่าก่อน
+            steps.forEach(s => { s.style.backgroundColor = "#F7F4EF"; s.style.borderColor = "#EADCC9"; s.innerHTML = ""; });
+            texts.forEach(t => { t.style.color = "#BC9B8B"; t.classList.remove('font-semibold'); t.classList.add('font-medium'); });
+            lines.forEach(l => { l.style.height = "0%"; });
 
             if(status === "สั่งผลิตเรียบร้อย") {
                 s1.style.backgroundColor = "#8C6239"; s1.style.borderColor = "#8C6239"; s1.innerHTML = "✓";
-                line.style.width = "0%";
+                t1.style.color = "#8C6239"; t1.classList.add('font-semibold');
             } else if(status === "ของถึงโกดังจีน") {
                 s1.style.backgroundColor = "#BC9B8B"; s1.style.borderColor = "#BC9B8B"; s1.innerHTML = "✓";
                 s2.style.backgroundColor = "#8C6239"; s2.style.borderColor = "#8C6239"; s2.innerHTML = "✓";
-                line.style.width = "25%";
+                t2.style.color = "#8C6239"; t2.classList.add('font-semibold');
+                l1.style.height = "100%";
             } else if(status === "ของถึงโกดังไทย") {
                 s1.style.backgroundColor = "#BC9B8B"; s1.style.borderColor = "#BC9B8B"; s1.innerHTML = "✓";
                 s2.style.backgroundColor = "#BC9B8B"; s2.style.borderColor = "#BC9B8B"; s2.innerHTML = "✓";
                 s3.style.backgroundColor = "#8C6239"; s3.style.borderColor = "#8C6239"; s3.innerHTML = "✓";
-                line.style.width = "50%";
+                t3.style.color = "#8C6239"; t3.classList.add('font-semibold');
+                l1.style.height = "100%"; l2.style.height = "100%";
             } else if(status === "ของถึงร้านรอจัดส่ง") {
                 s1.style.backgroundColor = "#BC9B8B"; s1.style.borderColor = "#BC9B8B"; s1.innerHTML = "✓";
                 s2.style.backgroundColor = "#BC9B8B"; s2.style.borderColor = "#BC9B8B"; s2.innerHTML = "✓";
                 s3.style.backgroundColor = "#BC9B8B"; s3.style.borderColor = "#BC9B8B"; s3.innerHTML = "✓";
                 s4.style.backgroundColor = "#8C6239"; s4.style.borderColor = "#8C6239"; s4.innerHTML = "✓";
-                line.style.width = "75%";
+                t4.style.color = "#8C6239"; t4.classList.add('font-semibold');
+                l1.style.height = "100%"; l2.style.height = "100%"; l3.style.height = "100%";
             } else if(status === "จัดส่งเรียบร้อย") {
-                steps.forEach(s => {
-                    s.style.backgroundColor = "#BC9B8B"; s.style.borderColor = "#BC9B8B"; s.innerHTML = "✓";
-                });
+                steps.forEach(s => { s.style.backgroundColor = "#BC9B8B"; s.style.borderColor = "#BC9B8B"; s.innerHTML = "✓"; });
                 s5.style.backgroundColor = "#8C6239"; s5.style.borderColor = "#8C6239";
-                line.style.width = "100%";
+                t5.style.color = "#8C6239"; t5.classList.add('font-semibold');
+                lines.forEach(l => { l.style.height = "100%"; });
             }
         }
 
