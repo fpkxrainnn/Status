@@ -68,93 +68,8 @@
             </button>
         </div>
 
-        <div id="result-box" class="hidden mt-8 pt-6 border-t space-y-5" style="border-color: #F7F4EF;">
-            
-            <div class="p-4 rounded-xl border flex justify-between items-center" style="background-color: #FDFBF7; border-color: #F3EBE1;">
-                <div>
-                    <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">วันที่สั่งซื้อ</p>
-                    <p id="res-date" class="text-base font-medium mt-1" style="color: #8C6239;">-</p>
-                </div>
-            </div>
-
-            <div class="p-4 rounded-xl border" style="background-color: #FDFBF7; border-color: #F3EBE1;">
-                <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">สินค้าของคุณ</p>
-                <p id="res-product" class="text-base font-medium mt-1" style="color: #8C6239;">-</p>
-            </div>
-
-            <div class="p-4 rounded-xl border flex justify-between items-center" style="background-color: #FDFBF7; border-color: #F3EBE1;">
-                <div>
-                    <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">การชำระเงิน</p>
-                    <p id="res-payment" class="text-base font-semibold mt-1" style="color: #8C6239;">-</p>
-                </div>
-                <span id="payment-badge" class="px-3 py-1 rounded-full text-xs font-medium"></span>
-            </div>
-
-            <div>
-                <p class="text-xs font-medium uppercase tracking-wider mb-4" style="color: #BC9B8B;">สถานะสินค้าล่าสุด</p>
-                
-                <div class="space-y-6 pl-2">
-                    
-                    <div class="relative flex items-start">
-                        <div class="vertical-line"></div>
-                        <div id="line-p1" class="vertical-line-progress"></div>
-                        <div id="step-1" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                        <div class="ml-4">
-                            <p id="txt-1" class="text-sm font-semibold transition-all" style="color: #BC9B8B;">สั่งผลิตเรียบร้อย</p>
-                        </div>
-                    </div>
-
-                    <div class="relative flex items-start">
-                        <div class="vertical-line"></div>
-                        <div id="line-p2" class="vertical-line-progress"></div>
-                        <div id="step-2" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                        <div class="ml-4">
-                            <p id="txt-2" class="text-sm font-medium transition-all" style="color: #BC9B8B;">ของถึงโกดังจีน</p>
-                        </div>
-                    </div>
-
-                    <div class="relative flex items-start">
-                        <div class="vertical-line"></div>
-                        <div id="line-p3" class="vertical-line-progress"></div>
-                        <div id="step-3" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                        <div class="ml-4">
-                            <p id="txt-3" class="text-sm font-medium transition-all" style="color: #BC9B8B;">ของถึงโกดังไทย</p>
-                        </div>
-                    </div>
-
-                    <div class="relative flex items-start">
-                        <div class="vertical-line"></div>
-                        <div id="line-p4" class="vertical-line-progress"></div>
-                        <div id="step-4" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                        <div class="ml-4">
-                            <p id="txt-4" class="text-sm font-medium transition-all" style="color: #BC9B8B;">ของถึงร้านรอจัดส่ง</p>
-                        </div>
-                    </div>
-
-                    <div class="relative flex items-start">
-                        <div id="step-5" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                        <div class="ml-4">
-                            <p id="txt-5" class="text-sm font-medium transition-all" style="color: #BC9B8B;">จัดส่งเรียบร้อย</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div id="tracking-box" class="hidden p-4 rounded-xl border flex justify-between items-center" style="background-color: #FFF5F7; border-color: #FFE5EC;">
-                <div>
-                    <p class="text-xs font-medium" style="color: #F3B0C3;">เลขพัสดุของคุณ</p>
-                    <p id="res-tracking" class="text-base font-bold mt-0.5" style="color: #8C6239;">-</p>
-                </div>
-                <button onclick="copyTracking()" class="text-xs bg-white border px-3 py-1.5 rounded-lg transition-all focus:outline-none" style="border-color: #FFE5EC; color: #8C6239;">
-                    คัดลอก
-                </button>
-            </div>
-
-            <div id="note-box" class="hidden p-4 rounded-xl text-xs leading-relaxed" style="background-color: #F7F4EF; color: #8C6239;">
-                <strong>หมายเหตุ:</strong> <span id="res-note">-</span>
-            </div>
-        </div>
+        <!-- พื้นที่สำหรับแสดงผลออเดอร์ทั้งหมด -->
+        <div id="orders-container" class="space-y-8 mt-8"></div>
 
         <div id="error-box" class="hidden mt-6 text-center text-sm p-3 rounded-xl border" style="color: #D16D6D; background-color: #FFF5F5; border-color: #FFE5EC;">
             ไม่พบข้อมูลออเดอร์ของคุณ กรุณาตรวจสอบข้อมูลอีกครั้งค่ะ
@@ -182,7 +97,8 @@
                 tabPhone.style.backgroundColor = "transparent";
                 tabPhone.style.color = "#BC9B8B";
                 input.placeholder = "กรอกชื่อแอคเค้าท์ของคุณ";
-            } else {tabAccount.style.backgroundColor = "transparent";
+            } else {
+                tabAccount.style.backgroundColor = "transparent";
                 tabAccount.style.color = "#BC9B8B";
                 tabPhone.style.backgroundColor = "#FFD1DC";
                 tabPhone.style.color = "#8C6239";
@@ -197,7 +113,7 @@
 
         async function searchOrder() {
             const inputValue = document.getElementById('search-input').value.trim().toLowerCase();
-            const resultBox = document.getElementById('result-box');
+            const container = document.getElementById('orders-container');
             const errorBox = document.getElementById('error-box');
             const btnText = document.getElementById('btn-text');
             const searchBtn = document.getElementById('search-btn');
@@ -209,7 +125,7 @@
 
             btnText.innerHTML = "<b>กำลังค้นหา...</b>";
             searchBtn.disabled = true;
-            resultBox.classList.add('hidden');
+            container.innerHTML = "";
             errorBox.classList.add('hidden');
 
             try {
@@ -217,7 +133,7 @@
                 const dataText = await response.text();
                 
                 const lines = dataText.split(/\r?\n/);
-                let foundData = null;
+                let matchedOrders = [];
 
                 for(let i = 1; i < lines.length; i++) {
                     if (!lines[i]) continue;
@@ -230,57 +146,130 @@
                     const cleanInput = inputValue.replace(/-/g, "");
 
                     if(currentSearchType === 'account' && sheetAccount === cleanInput) {
-                        foundData = cols.map(c => cleanCell(c));
-                        break;
+                        matchedOrders.push(cols.map(c => cleanCell(c)));
                     } else if(currentSearchType === 'phone' && sheetPhone === cleanInput) {
-                        foundData = cols.map(c => cleanCell(c));
-                        break;
+                        matchedOrders.push(cols.map(c => cleanCell(c)));
                     }
                 }
 
-                if(foundData) {
+                if(matchedOrders.length > 0) {
                     errorBox.classList.add('hidden');
-                    resultBox.classList.remove('hidden');
                     
-                    document.getElementById('res-date').innerText = foundData[0] || "-"; 
-                    document.getElementById('res-product').innerText = foundData[3] || "-"; 
-                    
-                    const payStatus = foundData[4] || "-"; 
-                    document.getElementById('res-payment').innerText = payStatus;
-                    const badge = document.getElementById('payment-badge');
-                    
-                    if(payStatus.includes("จ่ายครบแล้ว") || payStatus.includes("สำเร็จ") || payStatus.toLowerCase().includes("paid")) {
-                        badge.style.backgroundColor = "#E6F4EA";
-                        badge.style.color = "#137333";
-                        badge.innerText = "Paid";
-                    } else if (payStatus.includes("มัดจำ")) {
-                        badge.style.backgroundColor = "#FEF7E0";
-                        badge.style.color = "#B06000";
-                        badge.innerText = "Deposit";
-                    } else {
-                        badge.style.backgroundColor = "#F1F3F4";
-                        badge.style.color = "#5F6368";
-                        badge.innerText = "Pending";
-                    }
-                    
-                    const shippingStatus = foundData[5] || "-"; 
-                    updateProgressBar(shippingStatus);
+                    matchedOrders.forEach((order, index) => {
+                        const date = order[0] || "-";
+                        const product = order[3] || "-";
+                        const payStatus = order[4] || "-";
+                        const shippingStatus = order[5] || "-";
+                        const tracking = order[6] || "-";
+                        const note = order[7] || "";
+                        const etaChinaToThai = order[8] || ""; // ดึงข้อมูลคอลัมน์ที่ 9 (คาดว่าจะถึงไทย)
 
-                    const trackingBox = document.getElementById('tracking-box');
-                    if(shippingStatus === "จัดส่งเรียบร้อย" && foundData[6] && foundData[6] !== "-") { 
-                        trackingBox.classList.remove('hidden');
-                        document.getElementById('res-tracking').innerText = foundData[6];
-                    } else {
-                        trackingBox.classList.add('hidden');
-                    }
+                        let badgeColor = "background-color: #F1F3F4; color: #5F6368;";
+                        let badgeText = "Pending";
+                        if(payStatus.includes("จ่ายครบแล้ว") || payStatus.includes("สำเร็จ") || payStatus.toLowerCase().includes("paid")) {
+                            badgeColor = "background-color: #E6F4EA; color: #137333;";
+                            badgeText = "Paid";
+                        } else if (payStatus.includes("มัดจำ")) {
+                            badgeColor = "background-color: #FEF7E0; color: #B06000;";
+                            badgeText = "Deposit";
+                        }
 
-                    const noteBox = document.getElementById('note-box');
-                    if(foundData[7] && foundData[7] !== "") { 
-                        noteBox.classList.remove('hidden');
-                        document.getElementById('res-note').innerText = foundData[7];
-                    } else {
-                        noteBox.classList.add('hidden');
-                    }
+                        const orderHtml = `
+                            <div class="pt-6 border-t space-y-5" style="border-color: #F7F4EF;">
+                                <div class="text-xs font-bold px-1" style="color: #8C6239;">📦 ออเดอร์ที่ ${index + 1}</div>
+                                
+                                <!-- วันที่สั่งซื้อ -->
+                                <div class="p-4 rounded-xl border flex justify-between items-center" style="background-color: #FDFBF7; border-color: #F3EBE1;">
+                                    <div>
+                                        <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">วันที่สั่งซื้อ</p>
+                                        <p class="text-base font-medium mt-1" style="color: #8C6239;">${date}</p>
+                                    </div>
+                                </div>
+
+                                <!-- คาดว่าจะถึงไทย (จะซ่อนอัตโนมัติหากไม่ได้กรอกใน Sheet) -->
+                                <div id="eta-box-${index}" class="${etaChinaToThai ? '' : 'hidden'} p-4 rounded-xl border flex justify-between items-center" style="background-color: #FFF9F2; border-color: #FCE8D5;">
+                                    <div>
+                                        <p class="text-xs font-medium uppercase tracking-wider" style="color: #D9822B;">✈️ คาดว่าจะถึงไทย</p>
+                                        <p class="text-base font-semibold mt-1" style="color: #8C6239;">${etaChinaToThai || '-'}</p>
+                                    </div>
+                                </div>
+
+                                <!-- ข้อมูลสินค้า -->
+                                <div class="p-4 rounded-xl border" style="background-color: #FDFBF7; border-color: #F3EBE1;">
+                                    <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">สินค้าของคุณ</p>
+                                    <p class="text-base font-medium mt-1" style="color: #8C6239;">${product}</p>
+                                </div>
+
+                                <!-- การชำระเงิน -->
+                                <div class="p-4 rounded-xl border flex justify-between items-center" style="background-color: #FDFBF7; border-color: #F3EBE1;">
+                                    <div>
+                                        <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">การชำระเงิน</p>
+                                        <p class="text-base font-semibold mt-1" style="color: #8C6239;">${payStatus}</p>
+                                    </div>
+                                    <span class="px-3 py-1 rounded-full text-xs font-medium" style="${badgeColor}">${badgeText}</span>
+                                </div>
+
+                                <!-- สถานะสินค้าแนวตั้ง -->
+                                <div>
+                                    <p class="text-xs font-medium uppercase tracking-wider mb-4" style="color: #BC9B8B;">สถานะสินค้าล่าสุด</p>
+                                    <div class="space-y-6 pl-2">
+                                        <div class="relative flex items-start">
+                                            <div class="vertical-line"></div>
+                                            <div id="line-p1-${index}" class="vertical-line-progress"></div>
+                                            <div id="step-1-${index}" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                                            <div class="ml-4"><p id="txt-1-${index}" class="text-sm font-medium" style="color: #BC9B8B;">สั่งผลิตเรียบร้อย</p></div>
+                                        </div>
+                                        <div class="relative flex items-start">
+                                            <div class="vertical-line"></div>
+                                            <div id="line-p2-${index}" class="vertical-line-progress"></div>
+                                            <div id="step-2-${index}" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                                            <div class="ml-4"><p id="txt-2-${index}" class="text-sm font-medium" style="color: #BC9B8B;">ของถึงโกดังจีน</p></div>
+                                        </div>
+                                        <div class="relative flex items-start">
+                                            <div class="vertical-line"></div>
+                                            <div id="line-p3-${index}" class="vertical-line-progress"></div>
+                                            <div id="step-3-${index}" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                                            <div class="ml-4"><p id="txt-3-${index}" class="text-sm font-medium" style="color: #BC9B8B;">ของถึงโกดังไทย</p></div>
+                                        </div>
+                                        <div class="relative flex items-start">
+                                            <div class="vertical-line"></div>
+                                            <div id="line-p4-${index}" class="vertical-line-progress"></div>
+                                            <div id="step-4-${index}" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                                            <div class="ml-4"><p id="txt-4-${index}" class="text-sm font-medium" style="color: #BC9B8B;">ของถึงร้านรอจัดส่ง</p></div>
+                                        </div>
+                                        <div class="relative flex items-start">
+                                            <div id="step-5-${index}" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                                            <div class="ml-4"><p id="txt-5-${index}" class="text-sm font-medium" style="color: #BC9B8B;">จัดส่งเรียบร้อย</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="tracking-box-${index}" class="hidden p-4 rounded-xl border flex justify-between items-center" style="background-color: #FFF5F7; border-color: #FFE5EC;">
+                                    <div>
+                                        <p class="text-xs font-medium" style="color: #F3B0C3;">เลขพัสดุของคุณ</p>
+                                        <p id="res-tracking-${index}" class="text-base font-bold mt-0.5" style="color: #8C6239;">${tracking}</p>
+                                    </div>
+                                    <button onclick="copyTracking('${tracking}')" class="text-xs bg-white border px-3 py-1.5 rounded-lg transition-all focus:outline-none" style="border-color: #FFE5EC; color: #8C6239;">คัดลอก</button>
+                                </div>
+
+                                <div id="note-box-${index}" class="hidden p-4 rounded-xl text-xs leading-relaxed" style="background-color: #F7F4EF; color: #8C6239;">
+                                    <strong>หมายเหตุ:</strong> <span>${note}</span>
+                                </div>
+                            </div>
+                        `;
+                        
+                        container.insertAdjacentHTML('beforeend', orderHtml);
+                        
+                        updateProgressBar(shippingStatus, index);
+
+                        if(shippingStatus === "จัดส่งเรียบร้อย" && tracking !== "-") {
+                            document.getElementById(`tracking-box-${index}`).classList.remove('hidden');
+                        }
+                        if(note !== "") {
+                            document.getElementById(`note-box-${index}`).classList.remove('hidden');
+                        }
+                    });
+
                 } else {
                     errorBox.classList.remove('hidden');
                 }
@@ -293,22 +282,16 @@
             }
         }
 
-        // ฟังก์ชันระบบแนวตั้ง 5 ขั้นตอน ลากเส้นและระบายสีตัวอักษรให้อัตโนมัติ
-        function updateProgressBar(status) {
-            const s1 = document.getElementById('step-1'); const t1 = document.getElementById('txt-1'); const l1 = document.getElementById('line-p1');
-            const s2 = document.getElementById('step-2'); const t2 = document.getElementById('txt-2'); const l2 = document.getElementById('line-p2');
-            const s3 = document.getElementById('step-3'); const t3 = document.getElementById('txt-3'); const l3 = document.getElementById('line-p3');
-            const s4 = document.getElementById('step-4'); const t4 = document.getElementById('txt-4'); const l4 = document.getElementById('line-p4');
-            const s5 = document.getElementById('step-5'); const t5 = document.getElementById('txt-5');
+        function updateProgressBar(status, index) {
+            const s1 = document.getElementById(`step-1-${index}`); const t1 = document.getElementById(`txt-1-${index}`); const l1 = document.getElementById(`line-p1-${index}`);
+            const s2 = document.getElementById(`step-2-${index}`); const t2 = document.getElementById(`txt-2-${index}`); const l2 = document.getElementById(`line-p2-${index}`);
+            const s3 = document.getElementById(`step-3-${index}`); const t3 = document.getElementById(`txt-3-${index}`); const l3 = document.getElementById(`line-p3-${index}`);
+            const s4 = document.getElementById(`step-4-${index}`); const t4 = document.getElementById(`txt-4-${index}`); const l4 = document.getElementById(`line-p4-${index}`);
+            const s5 = document.getElementById(`step-5-${index}`); const t5 = document.getElementById(`txt-5-${index}`);
 
             const steps = [s1, s2, s3, s4, s5];
             const texts = [t1, t2, t3, t4, t5];
             const lines = [l1, l2, l3, l4];
-
-            // ล้างสถานะเก่าก่อน
-            steps.forEach(s => { s.style.backgroundColor = "#F7F4EF"; s.style.borderColor = "#EADCC9"; s.innerHTML = ""; });
-            texts.forEach(t => { t.style.color = "#BC9B8B"; t.classList.remove('font-semibold'); t.classList.add('font-medium'); });
-            lines.forEach(l => { l.style.height = "0%"; });
 
             if(status === "สั่งผลิตเรียบร้อย") {
                 s1.style.backgroundColor = "#8C6239"; s1.style.borderColor = "#8C6239"; s1.innerHTML = "✓";
@@ -339,8 +322,7 @@
             }
         }
 
-        function copyTracking() {
-            const text = document.getElementById('res-tracking').innerText;
+        function copyTracking(text) {
             navigator.clipboard.writeText(text).then(() => {
                 alert("คัดลอกเลขพัสดุเรียบร้อยแล้วค่ะ!");
             });
