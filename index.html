@@ -166,7 +166,7 @@
                         const payStatus = order[4] || "-";
                         const shippingStatus = order[5] || "-";
                         const tracking = order[6] || "-";
-                        const courier = order[7] || "Flash Express"; // ค่าเริ่มต้นถ้าไม่ได้ระบุ
+                        const courier = order[7] || "Flash Express"; // ค่าเริ่มต้น
                         const note = order[8] || "";
                         const etaChinaToThai = order[9] || ""; 
 
@@ -250,10 +250,10 @@
                                     </div>
                                 </div>
 
-                                <!-- กล่องแสดงเลขพัสดุ + ชื่อขนส่ง -->
+                                <!-- กล่องแสดงเลขพัสดุ + ชื่อขนส่ง (ปรับเป็นสีน้ำตาลเข้ม) -->
                                 <div id="tracking-box-${index}" class="hidden p-4 rounded-xl border flex justify-between items-center" style="background-color: #FFF5F7; border-color: #FFE5EC;">
                                     <div>
-                                        <p class="text-xs font-medium" style="color: #F3B0C3;">🚚 ขนส่ง: <span class="font-bold text-gray-700">${courier}</span></p>
+                                        <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">🚚 ขนส่ง: <span class="font-bold" style="color: #8C6239;">${courier}</span></p>
                                         <p id="res-tracking-${index}" class="text-base font-bold mt-0.5" style="color: #8C6239;">${tracking}</p>
                                     </div>
                                     <button onclick="copyTracking('${tracking}')" class="text-xs bg-white border px-3 py-1.5 rounded-lg transition-all focus:outline-none" style="border-color: #FFE5EC; color: #8C6239;">คัดลอก</button>
