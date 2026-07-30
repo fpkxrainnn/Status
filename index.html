@@ -19,7 +19,7 @@
             pointer-events: auto !important;
             cursor: pointer;
         }
-        /* สร้างเส้นประแนวตั้ง */
+        /* เส้นประแนวตั้ง */
         .vertical-line {
             position: absolute;
             left: 11px;
@@ -45,7 +45,7 @@
 
     <div class="w-full max-w-md bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
         
-        <!-- หัวข้อหน้าเว็บ: หัวใหญ่ + ชื่อร้านในกรอบสีชมพู -->
+        <!-- หัวข้อหน้าเว็บ -->
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold tracking-wide mb-3" style="color: #8C6239;">ระบบเช็คสถานะ</h1>
             
@@ -54,6 +54,7 @@
             </div>
         </div>
 
+        <!-- แท็บสลับการค้นหา -->
         <div class="flex p-1 rounded-xl mb-6" style="background-color: #F7F4EF;">
             <button id="tab-account" onclick="switchTab('account')" class="flex-1 py-2 text-sm font-medium rounded-lg transition-all focus:outline-none" style="background-color: #FFD1DC; color: #8C6239;">
                 ชื่อแอคเค้าท์
@@ -72,7 +73,7 @@
             </button>
         </div>
 
-        <!-- พื้นที่สำหรับแสดงผลออเดอร์ทั้งหมด -->
+        <!-- พื้นที่สำหรับแสดงผลออเดอร์ -->
         <div id="orders-container" class="space-y-8 mt-8"></div>
 
         <div id="error-box" class="hidden mt-6 text-center text-sm p-3 rounded-xl border" style="color: #D16D6D; background-color: #FFF5F5; border-color: #FFE5EC;">
@@ -165,8 +166,9 @@
                         const payStatus = order[4] || "-";
                         const shippingStatus = order[5] || "-";
                         const tracking = order[6] || "-";
-                        const note = order[7] || "";
-                        const etaChinaToThai = order[8] || ""; 
+                        const courier = order[7] || "Flash Express"; // ค่าเริ่มต้นถ้าไม่ได้ระบุ
+                        const note = order[8] || "";
+                        const etaChinaToThai = order[9] || ""; 
 
                         let badgeColor = "background-color: #F1F3F4; color: #5F6368;";
                         let badgeText = "Pending";
@@ -248,9 +250,10 @@
                                     </div>
                                 </div>
 
+                                <!-- กล่องแสดงเลขพัสดุ + ชื่อขนส่ง -->
                                 <div id="tracking-box-${index}" class="hidden p-4 rounded-xl border flex justify-between items-center" style="background-color: #FFF5F7; border-color: #FFE5EC;">
                                     <div>
-                                        <p class="text-xs font-medium" style="color: #F3B0C3;">เลขพัสดุของคุณ</p>
+                                        <p class="text-xs font-medium" style="color: #F3B0C3;">🚚 ขนส่ง: <span class="font-bold text-gray-700">${courier}</span></p>
                                         <p id="res-tracking-${index}" class="text-base font-bold mt-0.5" style="color: #8C6239;">${tracking}</p>
                                     </div>
                                     <button onclick="copyTracking('${tracking}')" class="text-xs bg-white border px-3 py-1.5 rounded-lg transition-all focus:outline-none" style="border-color: #FFE5EC; color: #8C6239;">คัดลอก</button>
