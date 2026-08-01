@@ -19,6 +19,11 @@
             pointer-events: auto !important;
             cursor: pointer;
         }
+        /* สี Placeholder ให้เป็นสีน้ำตาลอ่อน */
+        #search-input::placeholder {
+            color: #BC9B8B;
+            opacity: 1;
+        }
         /* เส้นประแนวตั้ง */
         .vertical-line {
             position: absolute;
@@ -203,8 +208,8 @@
                                     </div>
                                 </div>
 
-                                <!-- ข้อมูลสินค้า -->
-                                <div class="p-4 rounded-xl border" style="background-color: #FDFBF7; border-color: #F3EBE1;">
+                                <!-- ข้อมูลสินค้า (ปรับเป็นกรอบสีชมพู) -->
+                                <div class="p-4 rounded-xl border" style="background-color: #FFF5F7; border-color: #FFE5EC;">
                                     <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">สินค้าของคุณ</p>
                                     <p class="text-base font-medium mt-1" style="color: #8C6239;">${product}</p>
                                 </div>
@@ -218,11 +223,11 @@
                                     <span class="px-3 py-1 rounded-full text-xs font-medium" style="${badgeColor}">${badgeText}</span>
                                 </div>
 
-                                <!-- ยอดค้างชำระ (แสดงเมื่อเป็น มัดจำ และมียอดค้างชำระระบุไว้) -->
-                                <div id="balance-box-${index}" class="${(isDeposit && remainingBalance) ? '' : 'hidden'} p-4 rounded-xl border flex justify-between items-center" style="background-color: #FFFBF5; border-color: #FFE5D9;">
+                                <!-- ยอดค้างชำระ (หัวข้อสีน้ำตาลอ่อน / จำนวนเงินสีน้ำตาลเข้ม) -->
+                                <div id="balance-box-${index}" class="${(isDeposit && remainingBalance) ? '' : 'hidden'} p-4 rounded-xl border flex justify-between items-center" style="background-color: #FDFBF7; border-color: #F3EBE1;">
                                     <div>
-                                        <p class="text-xs font-medium uppercase tracking-wider" style="color: #D97706;">💰 ยอดค้างชำระ</p>
-                                        <p class="text-base font-bold mt-1" style="color: #B45309;">${remainingBalance} บาท</p>
+                                        <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">💰 ยอดค้างชำระ</p>
+                                        <p class="text-base font-bold mt-1" style="color: #8C6239;">${remainingBalance} บาท</p>
                                     </div>
                                 </div>
 
