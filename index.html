@@ -166,16 +166,19 @@
                         const payStatus = order[4] || "-";
                         const shippingStatus = order[5] || "-";
                         const tracking = order[6] || "-";
-                        const courier = order[7] || "Flash Express"; // ค่าเริ่มต้น
+                        const courier = order[7] || "Flash Express";
                         const note = order[8] || "";
                         const etaChinaToThai = order[9] || ""; 
+                        const remainingBalance = order[10] || ""; // คอลัมน์ K (ยอดค้างชำระ)
 
                         let badgeColor = "background-color: #F1F3F4; color: #5F6368;";
                         let badgeText = "Pending";
+                        const isDeposit = payStatus.includes("มัดจำ");
+
                         if(payStatus.includes("จ่ายครบแล้ว") || payStatus.includes("สำเร็จ") || payStatus.toLowerCase().includes("paid")) {
                             badgeColor = "background-color: #E6F4EA; color: #137333;";
                             badgeText = "Paid";
-                        } else if (payStatus.includes("มัดจำ")) {
+                        } else if (isDeposit) {
                             badgeColor = "background-color: #FEF7E0; color: #B06000;";
                             badgeText = "Deposit";
                         }
@@ -215,6 +218,14 @@
                                     <span class="px-3 py-1 rounded-full text-xs font-medium" style="${badgeColor}">${badgeText}</span>
                                 </div>
 
+                                <!-- ยอดค้างชำระ (แสดงเมื่อเป็น มัดจำ และมียอดค้างชำระระบุไว้) -->
+                                <div id="balance-box-${index}" class="${(isDeposit && remainingBalance) ? '' : 'hidden'} p-4 rounded-xl border flex justify-between items-center" style="background-color: #FFFBF5; border-color: #FFE5D9;">
+                                    <div>
+                                        <p class="text-xs font-medium uppercase tracking-wider" style="color: #D97706;">💰 ยอดค้างชำระ</p>
+                                        <p class="text-base font-bold mt-1" style="color: #B45309;">${remainingBalance} บาท</p>
+                                    </div>
+                                </div>
+
                                 <!-- สถานะสินค้าแนวตั้ง -->
                                 <div>
                                     <p class="text-xs font-medium uppercase tracking-wider mb-4" style="color: #BC9B8B;">สถานะสินค้าล่าสุด</p>
@@ -250,7 +261,7 @@
                                     </div>
                                 </div>
 
-                                <!-- กล่องแสดงเลขพัสดุ + ชื่อขนส่ง (ปรับเป็นสีน้ำตาลเข้ม) -->
+                                <!-- กล่องแสดงเลขพัสดุ + ชื่อขนส่ง -->
                                 <div id="tracking-box-${index}" class="hidden p-4 rounded-xl border flex justify-between items-center" style="background-color: #FFF5F7; border-color: #FFE5EC;">
                                     <div>
                                         <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">🚚 ขนส่ง: <span class="font-bold" style="color: #8C6239;">${courier}</span></p>
