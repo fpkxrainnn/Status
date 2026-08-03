@@ -19,12 +19,10 @@
             pointer-events: auto !important;
             cursor: pointer;
         }
-        /* สี Placeholder ให้เป็นสีน้ำตาลอ่อน */
         #search-input::placeholder {
             color: #BC9B8B;
             opacity: 1;
         }
-        /* เส้นประแนวตั้ง */
         .vertical-line {
             position: absolute;
             left: 11px;
@@ -50,7 +48,6 @@
 
     <div class="w-full max-w-md bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
         
-        <!-- หัวข้อหน้าเว็บ -->
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold tracking-wide mb-3" style="color: #8C6239;">ระบบเช็คสถานะ</h1>
             
@@ -59,7 +56,6 @@
             </div>
         </div>
 
-        <!-- แท็บสลับการค้นหา -->
         <div class="flex p-1 rounded-xl mb-6" style="background-color: #F7F4EF;">
             <button id="tab-account" onclick="switchTab('account')" class="flex-1 py-2 text-sm font-medium rounded-lg transition-all focus:outline-none" style="background-color: #FFD1DC; color: #8C6239;">
                 ชื่อแอคเค้าท์
@@ -78,7 +74,6 @@
             </button>
         </div>
 
-        <!-- พื้นที่สำหรับแสดงผลออเดอร์ -->
         <div id="orders-container" class="space-y-8 mt-8"></div>
 
         <div id="error-box" class="hidden mt-6 text-center text-sm p-3 rounded-xl border" style="color: #D16D6D; background-color: #FFF5F5; border-color: #FFE5EC;">
@@ -178,9 +173,12 @@
 
                         let badgeColor = "background-color: #F1F3F4; color: #5F6368;";
                         let badgeText = "Pending";
+
+                        // เปลี่ยนให้ "ชำระรอบแรกครบแล้ว" หรือ "จ่ายครบแล้ว" หรือ "ชำระรอบครบแล้ว" แสดงเป็น Paid (สีเขียว)
+                        const isPaid = payStatus.includes("ชำระรอบแรกครบแล้ว") || payStatus.includes("ชำระรอบครบแล้ว") || payStatus.includes("จ่ายครบแล้ว") || payStatus.includes("สำเร็จ") || payStatus.toLowerCase().includes("paid");
                         const isDeposit = payStatus.includes("มัดจำ");
 
-                        if(payStatus.includes("จ่ายครบแล้ว") || payStatus.includes("สำเร็จ") || payStatus.toLowerCase().includes("paid")) {
+                        if(isPaid) {
                             badgeColor = "background-color: #E6F4EA; color: #137333;";
                             badgeText = "Paid";
                         } else if (isDeposit) {
@@ -192,7 +190,6 @@
                             <div class="pt-6 border-t space-y-5" style="border-color: #F7F4EF;">
                                 <div class="text-xs font-bold px-1" style="color: #8C6239;">📦 ออเดอร์ที่ ${index + 1}</div>
                                 
-                                <!-- วันที่สั่งซื้อ -->
                                 <div class="p-4 rounded-xl border flex justify-between items-center" style="background-color: #FDFBF7; border-color: #F3EBE1;">
                                     <div>
                                         <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">วันที่สั่งซื้อ</p>
@@ -200,7 +197,6 @@
                                     </div>
                                 </div>
 
-                                <!-- คาดว่าจะถึงไทย -->
                                 <div id="eta-box-${index}" class="${etaChinaToThai ? '' : 'hidden'} p-4 rounded-xl border flex justify-between items-center" style="background-color: #FDFBF7; border-color: #F3EBE1;">
                                     <div>
                                         <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">✈️ คาดว่าจะถึงไทย</p>
@@ -208,13 +204,11 @@
                                     </div>
                                 </div>
 
-                                <!-- ข้อมูลสินค้า (ปรับเป็นกรอบสีชมพู) -->
                                 <div class="p-4 rounded-xl border" style="background-color: #FFF5F7; border-color: #FFE5EC;">
                                     <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">สินค้าของคุณ</p>
                                     <p class="text-base font-medium mt-1" style="color: #8C6239;">${product}</p>
                                 </div>
 
-                                <!-- การชำระเงิน -->
                                 <div class="p-4 rounded-xl border flex justify-between items-center" style="background-color: #FDFBF7; border-color: #F3EBE1;">
                                     <div>
                                         <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">การชำระเงิน</p>
@@ -223,15 +217,14 @@
                                     <span class="px-3 py-1 rounded-full text-xs font-medium" style="${badgeColor}">${badgeText}</span>
                                 </div>
 
-                                <!-- ยอดค้างชำระ (หัวข้อสีน้ำตาลอ่อน / จำนวนเงินสีน้ำตาลเข้ม) -->
-                                <div id="balance-box-${index}" class="${(isDeposit && remainingBalance) ? '' : 'hidden'} p-4 rounded-xl border flex justify-between items-center" style="background-color: #FDFBF7; border-color: #F3EBE1;">
+                                <!-- ยอดค้างชำระ จะแสดงเฉพาะกรณีที่เป็นมัดจำและยังไม่ได้เป็นสถานะ Paid -->
+                                <div id="balance-box-${index}" class="${(isDeposit && !isPaid && remainingBalance) ? '' : 'hidden'} p-4 rounded-xl border flex justify-between items-center" style="background-color: #FDFBF7; border-color: #F3EBE1;">
                                     <div>
                                         <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">💰 ยอดค้างชำระ</p>
                                         <p class="text-base font-bold mt-1" style="color: #8C6239;">${remainingBalance} บาท</p>
                                     </div>
                                 </div>
 
-                                <!-- สถานะสินค้าแนวตั้ง -->
                                 <div>
                                     <p class="text-xs font-medium uppercase tracking-wider mb-4" style="color: #BC9B8B;">สถานะสินค้าล่าสุด</p>
                                     <div class="space-y-6 pl-2">
@@ -266,7 +259,6 @@
                                     </div>
                                 </div>
 
-                                <!-- กล่องแสดงเลขพัสดุ + ชื่อขนส่ง -->
                                 <div id="tracking-box-${index}" class="hidden p-4 rounded-xl border flex justify-between items-center" style="background-color: #FFF5F7; border-color: #FFE5EC;">
                                     <div>
                                         <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">🚚 ขนส่ง: <span class="font-bold" style="color: #8C6239;">${courier}</span></p>
