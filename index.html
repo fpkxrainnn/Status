@@ -174,7 +174,6 @@
                         let badgeColor = "background-color: #F1F3F4; color: #5F6368;";
                         let badgeText = "Pending";
 
-                        // เปลี่ยนให้ "ชำระรอบแรกครบแล้ว" หรือ "จ่ายครบแล้ว" หรือ "ชำระรอบครบแล้ว" แสดงเป็น Paid (สีเขียว)
                         const isPaid = payStatus.includes("ชำระรอบแรกครบแล้ว") || payStatus.includes("ชำระรอบครบแล้ว") || payStatus.includes("จ่ายครบแล้ว") || payStatus.includes("สำเร็จ") || payStatus.toLowerCase().includes("paid");
                         const isDeposit = payStatus.includes("มัดจำ");
 
@@ -217,7 +216,6 @@
                                     <span class="px-3 py-1 rounded-full text-xs font-medium" style="${badgeColor}">${badgeText}</span>
                                 </div>
 
-                                <!-- ยอดค้างชำระ จะแสดงเฉพาะกรณีที่เป็นมัดจำและยังไม่ได้เป็นสถานะ Paid -->
                                 <div id="balance-box-${index}" class="${(isDeposit && !isPaid && remainingBalance) ? '' : 'hidden'} p-4 rounded-xl border flex justify-between items-center" style="background-color: #FDFBF7; border-color: #F3EBE1;">
                                     <div>
                                         <p class="text-xs font-medium uppercase tracking-wider" style="color: #BC9B8B;">💰 ยอดค้างชำระ</p>
@@ -228,33 +226,45 @@
                                 <div>
                                     <p class="text-xs font-medium uppercase tracking-wider mb-4" style="color: #BC9B8B;">สถานะสินค้าล่าสุด</p>
                                     <div class="space-y-6 pl-2">
+                                        <!-- Step 1 -->
                                         <div class="relative flex items-start">
                                             <div class="vertical-line"></div>
                                             <div id="line-p1-${index}" class="vertical-line-progress"></div>
                                             <div id="step-1-${index}" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
                                             <div class="ml-4"><p id="txt-1-${index}" class="text-sm font-medium" style="color: #BC9B8B;">สั่งผลิตเรียบร้อย</p></div>
                                         </div>
+                                        <!-- Step 2 -->
                                         <div class="relative flex items-start">
                                             <div class="vertical-line"></div>
                                             <div id="line-p2-${index}" class="vertical-line-progress"></div>
                                             <div id="step-2-${index}" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                                            <div class="ml-4"><p id="txt-2-${index}" class="text-sm font-medium" style="color: #BC9B8B;">ของถึงโกดังจีน</p></div>
+                                            <div class="ml-4"><p id="txt-2-${index}" class="text-sm font-medium" style="color: #BC9B8B;">ผลิตเสร็จ กำลังส่งไปโกดังจีน</p></div>
                                         </div>
+                                        <!-- Step 3 -->
                                         <div class="relative flex items-start">
                                             <div class="vertical-line"></div>
                                             <div id="line-p3-${index}" class="vertical-line-progress"></div>
                                             <div id="step-3-${index}" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                                            <div class="ml-4"><p id="txt-3-${index}" class="text-sm font-medium" style="color: #BC9B8B;">ของถึงโกดังไทย</p></div>
+                                            <div class="ml-4"><p id="txt-3-${index}" class="text-sm font-medium" style="color: #BC9B8B;">กำลังส่งมายังไทย</p></div>
                                         </div>
+                                        <!-- Step 4 -->
                                         <div class="relative flex items-start">
                                             <div class="vertical-line"></div>
                                             <div id="line-p4-${index}" class="vertical-line-progress"></div>
                                             <div id="step-4-${index}" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                                            <div class="ml-4"><p id="txt-4-${index}" class="text-sm font-medium" style="color: #BC9B8B;">ของถึงร้านรอจัดส่ง</p></div>
+                                            <div class="ml-4"><p id="txt-4-${index}" class="text-sm font-medium" style="color: #BC9B8B;">ของถึงโกดังไทย</p></div>
                                         </div>
+                                        <!-- Step 5 -->
                                         <div class="relative flex items-start">
+                                            <div class="vertical-line"></div>
+                                            <div id="line-p5-${index}" class="vertical-line-progress"></div>
                                             <div id="step-5-${index}" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
-                                            <div class="ml-4"><p id="txt-5-${index}" class="text-sm font-medium" style="color: #BC9B8B;">จัดส่งเรียบร้อย</p></div>
+                                            <div class="ml-4"><p id="txt-5-${index}" class="text-sm font-medium" style="color: #BC9B8B;">ของถึงร้านรอจัดส่ง</p></div>
+                                        </div>
+                                        <!-- Step 6 -->
+                                        <div class="relative flex items-start">
+                                            <div id="step-6-${index}" class="w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs text-white z-10 transition-all" style="background-color: #F7F4EF; border-color: #EADCC9;"></div>
+                                            <div class="ml-4"><p id="txt-6-${index}" class="text-sm font-medium" style="color: #BC9B8B;">จัดส่งเรียบร้อย</p></div>
                                         </div>
                                     </div>
                                 </div>
@@ -302,37 +312,46 @@
             const s2 = document.getElementById(`step-2-${index}`); const t2 = document.getElementById(`txt-2-${index}`); const l2 = document.getElementById(`line-p2-${index}`);
             const s3 = document.getElementById(`step-3-${index}`); const t3 = document.getElementById(`txt-3-${index}`); const l3 = document.getElementById(`line-p3-${index}`);
             const s4 = document.getElementById(`step-4-${index}`); const t4 = document.getElementById(`txt-4-${index}`); const l4 = document.getElementById(`line-p4-${index}`);
-            const s5 = document.getElementById(`step-5-${index}`); const t5 = document.getElementById(`txt-5-${index}`);
+            const s5 = document.getElementById(`step-5-${index}`); const t5 = document.getElementById(`txt-5-${index}`); const l5 = document.getElementById(`line-p5-${index}`);
+            const s6 = document.getElementById(`step-6-${index}`); const t6 = document.getElementById(`txt-6-${index}`);
 
-            const steps = [s1, s2, s3, s4, s5];
-            const texts = [t1, t2, t3, t4, t5];
-            const lines = [l1, l2, l3, l4];
+            const steps = [s1, s2, s3, s4, s5, s6];
+            const texts = [t1, t2, t3, t4, t5, t6];
+            const lines = [l1, l2, l3, l4, l5];
 
             if(status === "สั่งผลิตเรียบร้อย") {
                 s1.style.backgroundColor = "#8C6239"; s1.style.borderColor = "#8C6239"; s1.innerHTML = "✓";
                 t1.style.color = "#8C6239"; t1.classList.add('font-semibold');
-            } else if(status === "ของถึงโกดังจีน") {
+            } else if(status === "ผลิตเสร็จ กำลังส่งไปโกดังจีน") {
                 s1.style.backgroundColor = "#BC9B8B"; s1.style.borderColor = "#BC9B8B"; s1.innerHTML = "✓";
                 s2.style.backgroundColor = "#8C6239"; s2.style.borderColor = "#8C6239"; s2.innerHTML = "✓";
                 t2.style.color = "#8C6239"; t2.classList.add('font-semibold');
                 l1.style.height = "100%";
-            } else if(status === "ของถึงโกดังไทย") {
+            } else if(status === "กำลังส่งมายังไทย") {
                 s1.style.backgroundColor = "#BC9B8B"; s1.style.borderColor = "#BC9B8B"; s1.innerHTML = "✓";
                 s2.style.backgroundColor = "#BC9B8B"; s2.style.borderColor = "#BC9B8B"; s2.innerHTML = "✓";
                 s3.style.backgroundColor = "#8C6239"; s3.style.borderColor = "#8C6239"; s3.innerHTML = "✓";
                 t3.style.color = "#8C6239"; t3.classList.add('font-semibold');
                 l1.style.height = "100%"; l2.style.height = "100%";
-            } else if(status === "ของถึงร้านรอจัดส่ง") {
+            } else if(status === "ของถึงโกดังไทย") {
                 s1.style.backgroundColor = "#BC9B8B"; s1.style.borderColor = "#BC9B8B"; s1.innerHTML = "✓";
                 s2.style.backgroundColor = "#BC9B8B"; s2.style.borderColor = "#BC9B8B"; s2.innerHTML = "✓";
                 s3.style.backgroundColor = "#BC9B8B"; s3.style.borderColor = "#BC9B8B"; s3.innerHTML = "✓";
                 s4.style.backgroundColor = "#8C6239"; s4.style.borderColor = "#8C6239"; s4.innerHTML = "✓";
                 t4.style.color = "#8C6239"; t4.classList.add('font-semibold');
                 l1.style.height = "100%"; l2.style.height = "100%"; l3.style.height = "100%";
+            } else if(status === "ของถึงร้านรอจัดส่ง") {
+                s1.style.backgroundColor = "#BC9B8B"; s1.style.borderColor = "#BC9B8B"; s1.innerHTML = "✓";
+                s2.style.backgroundColor = "#BC9B8B"; s2.style.borderColor = "#BC9B8B"; s2.innerHTML = "✓";
+                s3.style.backgroundColor = "#BC9B8B"; s3.style.borderColor = "#BC9B8B"; s3.innerHTML = "✓";
+                s4.style.backgroundColor = "#BC9B8B"; s4.style.borderColor = "#BC9B8B"; s4.innerHTML = "✓";
+                s5.style.backgroundColor = "#8C6239"; s5.style.borderColor = "#8C6239"; s5.innerHTML = "✓";
+                t5.style.color = "#8C6239"; t5.classList.add('font-semibold');
+                l1.style.height = "100%"; l2.style.height = "100%"; l3.style.height = "100%"; l4.style.height = "100%";
             } else if(status === "จัดส่งเรียบร้อย") {
                 steps.forEach(s => { s.style.backgroundColor = "#BC9B8B"; s.style.borderColor = "#BC9B8B"; s.innerHTML = "✓"; });
-                s5.style.backgroundColor = "#8C6239"; s5.style.borderColor = "#8C6239";
-                t5.style.color = "#8C6239"; t5.classList.add('font-semibold');
+                s6.style.backgroundColor = "#8C6239"; s6.style.borderColor = "#8C6239";
+                t6.style.color = "#8C6239"; t6.classList.add('font-semibold');
                 lines.forEach(l => { l.style.height = "100%"; });
             }
         }
